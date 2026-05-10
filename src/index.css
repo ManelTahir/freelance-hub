@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc;
+}
+
+/* ── Theme color tokens ──────────────────────────────────── */
+:root,
+[data-theme="indigo"] {
+  --clr-50:  #EEF2FF;
+  --clr-100: #E0E7FF;
+  --clr-300: #A5B4FC;
+  --clr-500: #6366F1;
+  --clr-600: #4F46E5;
+  --clr-700: #4338CA;
+  --clr-800: #3730A3;
+  --clr-900: #312E81;
+  --clr-950: #1E1B4B;
+}
+[data-theme="violet"] {
+  --clr-50:  #F5F3FF;
+  --clr-100: #EDE9FE;
+  --clr-300: #C4B5FD;
+  --clr-500: #8B5CF6;
+  --clr-600: #7C3AED;
+  --clr-700: #6D28D9;
+  --clr-800: #5B21B6;
+  --clr-900: #4C1D95;
+  --clr-950: #2E1065;
+}
+[data-theme="rose"] {
+  --clr-50:  #FFF1F2;
+  --clr-100: #FFE4E6;
+  --clr-300: #FDA4AF;
+  --clr-500: #F43F5E;
+  --clr-600: #E11D48;
+  --clr-700: #BE123C;
+  --clr-800: #9F1239;
+  --clr-900: #881337;
+  --clr-950: #4C0519;
+}
+[data-theme="emerald"] {
+  --clr-50:  #ECFDF5;
+  --clr-100: #D1FAE5;
+  --clr-300: #6EE7B7;
+  --clr-500: #10B981;
+  --clr-600: #059669;
+  --clr-700: #047857;
+  --clr-800: #065F46;
+  --clr-900: #064E3B;
+  --clr-950: #022C22;
+}
+[data-theme="amber"] {
+  --clr-50:  #FFFBEB;
+  --clr-100: #FEF3C7;
+  --clr-300: #FCD34D;
+  --clr-500: #F59E0B;
+  --clr-600: #D97706;
+  --clr-700: #B45309;
+  --clr-800: #92400E;
+  --clr-900: #78350F;
+  --clr-950: #451A03;
+}
+[data-theme="sky"] {
+  --clr-50:  #F0F9FF;
+  --clr-100: #E0F2FE;
+  --clr-300: #7DD3FC;
+  --clr-500: #0EA5E9;
+  --clr-600: #0284C7;
+  --clr-700: #0369A1;
+  --clr-800: #075985;
+  --clr-900: #0C4A6E;
+  --clr-950: #082F49;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
