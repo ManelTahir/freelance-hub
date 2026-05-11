@@ -104,7 +104,7 @@ export default function Settings() {
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)', marginBottom: 18 }}>Accent Color</div>
         <div style={{ display: 'flex', gap: 10 }}>
           {THEMES.map(t => (
-            <button key={t} onClick={() => set('theme', t)} style={{
+            <button key={t} onClick={() => { set('theme', t); updateSettings({ theme: t }) }} style={{
               width: 32, height: 32, borderRadius: 8, border: form.theme === t ? `2px solid white` : '2px solid transparent',
               background: THEME_COLORS[t], cursor: 'pointer', outline: form.theme === t ? '2px solid rgba(255,255,255,0.3)' : 'none',
               outlineOffset: 2,
