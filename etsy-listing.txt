@@ -2,9 +2,9 @@
 ETSY LISTING — FREELANCEHUB
 ════════════════════════════════════════════════════════════
 
-TITRE (copie-colle tel quel)
-────────────────────────────
-Freelance Business Hub | Client, Project & Invoice Manager | Time Tracker | Web App | No Account Needed | Instant Access | Digital Download
+TITRE (140 chars max — copie-colle tel quel)
+─────────────────────────────────────────────
+FreelanceHub | All-in-One Freelancer OS | Invoices, Time Tracking, Finance & CRM | Web App | No Account Needed | Digital Download
 
 
 PRIX
@@ -19,91 +19,100 @@ Digital Downloads → Tools & Guides → Productivity Tools
 
 DESCRIPTION (copie-colle tel quel)
 ───────────────────────────────────
-Manage your entire freelance business from one beautiful dashboard — no account, no subscription, no cloud.
+Stop managing your freelance business across five different apps and a pile of spreadsheets.
 
-FreelanceHub is a full-featured interactive web app that runs entirely in your browser. Your data never leaves your device. Buy once, use forever.
+FreelanceHub is your all-in-one Freelancer OS — a complete web application that runs directly in your browser. Clients, invoices, projects, time, finances, and pipeline: everything in one place, organized and clear. No subscription. No account. No installation. Just open the link and start working.
 
-──────────────────────────────
-✦ WHAT'S INCLUDED
-──────────────────────────────
-→ Instant access link to the web app (works on any browser)
-→ 7-page PDF user guide with your personal access link
+It was built for freelancers who want to spend less time on admin and more time on paid work.
 
 ──────────────────────────────
-✦ FEATURES (10 sections)
+✦ WHAT YOU GET
 ──────────────────────────────
-→ Dashboard — monthly income, active projects, pipeline value at a glance
-→ Client Manager — contacts, status, notes, search & filter
-→ Project Pipeline — visual Kanban board (To Do → In Progress → Delivered → Paid)
-→ Finance Tracker — log income & expenses, monthly chart, real-time balance
-→ Invoices — create professional invoices with VAT, print or save as PDF
-→ Proposals — track quotes and project proposals by status
-→ Time Tracking — log hours per project, calculate earnings automatically
-→ Deal Pipeline — track leads with probability, see weighted pipeline value
-→ Tax Summary — instant taxable income overview and estimated tax due
-→ Notes — personal scratchpad for ideas, briefs, and meeting notes
-→ Rate Calculator — find your ideal hourly/daily rate based on your goals
-→ Recurring Items — track retainers and subscriptions in one place
-→ Export to Excel, CSV, or JSON backup anytime
+→ Instant access to the FreelanceHub web app (works on Chrome, Firefox, Safari, Edge)
+→ 7-page PDF user guide with step-by-step instructions for every section
 
 ──────────────────────────────
-✦ PERSONALIZE IT
+✦ WHAT'S INSIDE (12 modules)
 ──────────────────────────────
-→ 6 color accent themes (Indigo, Violet, Rose, Emerald, Amber, Sky)
-→ English interface
-→ Set your name, business name, currency, monthly income goal, and tax rate
+✅ Dashboard — live KPIs, monthly income chart, goal progress bar, and pipeline summary at a glance
+✅ Income & Expense Tracker — log every transaction, filter by type, see your real-time balance
+✅ Professional Invoices — create itemized invoices with VAT, due dates, and status tracking (Draft → Sent → Paid → Overdue). Print or save as PDF directly from the app.
+✅ Proposals — send quotes and track them by status. Convert accepted proposals into projects in one click.
+✅ Client Manager (CRM) — store contacts, notes, status, and history for every client
+✅ Project Management — Kanban board with visual progress tracking (To Do → In Progress → Delivered → Paid)
+✅ Time Tracking — log billable hours per project, calculate earnings automatically based on your rate
+✅ Deal Pipeline — drag leads from Prospect to Won, see your weighted pipeline value in real time
+✅ Recurring Items — track retainers, subscriptions, and fixed monthly income/expenses
+✅ Tax Summary — instant overview of taxable income, estimated tax, and deductible expenses for the year
+✅ Rate Calculator — find your minimum and ideal hourly/daily rate based on your income goal, working days, and overhead
+✅ Notes — a scratchpad for client briefs, meeting notes, and ideas — always accessible from the sidebar
 
 ──────────────────────────────
-✦ PERFECT FOR
+✦ ALSO INCLUDED
 ──────────────────────────────
-Freelance designers, developers, video editors, photographers, copywriters, consultants — anyone who juggles clients, projects, time, and invoices without wanting to pay $30/month for software.
+→ Export to Excel (.xlsx), CSV, or JSON backup — for your accountant or to transfer between devices
+→ 6 accent color themes (Violet, Indigo, Rose, Emerald, Amber, Sky) — personalize your workspace
+→ Multi-currency support: EUR, USD, GBP, CHF
+→ Monthly income goal tracker with visual progress
+
+──────────────────────────────
+✦ WHO IT'S FOR
+──────────────────────────────
+Freelancers, solopreneurs, independent consultants, designers, developers, video editors, photographers, copywriters, coaches — anyone running their own one-person business who wants a clean, fast system without paying €30/month for it.
+
+──────────────────────────────
+✦ WHY BUYERS CHOOSE FREELANCEHUB
+──────────────────────────────
+✅ Replaces 4–5 separate tools (CRM, invoice software, time tracker, finance app, spreadsheet)
+✅ Zero learning curve — intuitive from day one
+✅ Your data stays on YOUR device — no third party has access
+✅ Works on any device with a browser — desktop, laptop, or tablet
+✅ One-time purchase, no recurring cost, no feature lock
 
 ──────────────────────────────
 ✦ HOW IT WORKS
 ──────────────────────────────
-1. Purchase → you instantly receive a PDF with your access link and user guide
-2. Open the link in your browser (Chrome, Firefox, Safari, Edge)
-3. Start adding your clients, projects, and transactions — no setup needed
-
-No installation. No login. No monthly fee. Ever.
+1. Purchase → you instantly receive a PDF with your access link + full user guide
+2. Open the link in your browser — no download, no install, no login
+3. Start adding your clients, projects, and transactions immediately
 
 ──────────────────────────────
 ✦ YOUR DATA & PRIVACY
 ──────────────────────────────
-Everything is stored locally in your browser's localStorage. Nothing is sent to any server — not even the developer can see your data. Export a JSON backup anytime to transfer between devices or keep a safe copy.
+All data is stored exclusively in your browser's localStorage — on your device, offline, out of reach of any server or third party. For safety, export a JSON backup from Settings regularly. This tool does not replace professional tax or accounting advice.
 
 ──────────────────────────────
 ✦ QUESTIONS?
 ──────────────────────────────
-Message me anytime through Etsy — I respond within 24 hours.
+Message me on Etsy — I respond within 24 hours.
 
 
 TAGS (les 13 — copie-colle un par un dans Etsy)
 ────────────────────────────────────────────────
 freelance tracker
-client management tool
+freelancer os
 invoice generator
 time tracker freelance
-project manager
+client management crm
 finance tracker
-freelance business hub
-digital download
-web app tool
-income tracker
-freelancer planner
+project management tool
+digital download tool
+web app productivity
+income expense tracker
 deal pipeline tool
+rate calculator freelance
 no subscription tool
 
 
 ORDRE DES PHOTOS (glisse dans cet ordre)
 ─────────────────────────────────────────
-1. Dashboard (stat cards + graphique + pipeline summary) — photo principale
-2. Invoices (liste avec statuts Draft/Sent/Paid/Overdue)
-3. Projects Kanban (colonnes avec cartes)
-4. Finances (tableau + graphique barres)
-5. Time Tracking (timer + log d'heures)
-6. Clients (liste avec badges de statut)
-7. Settings — Appearance (6 couleurs + preview)
+1. Dashboard (KPIs + monthly chart + goal bar) — photo principale
+2. Invoices (liste avec statuts + preview d'une facture)
+3. Deal Pipeline (Kanban lead → won)
+4. Time Tracking (timer + log d'heures + earnings)
+5. Finance Tracker (tableau transactions + graphique barres)
+6. Clients/Projects (liste + Kanban board)
+7. Settings — Color themes (les 6 couleurs)
 
 
 PARAMÈTRES DU LISTING
