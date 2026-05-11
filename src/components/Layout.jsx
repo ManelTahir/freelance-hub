@@ -8,12 +8,13 @@ export default function Layout() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme || 'indigo')
+    document.body.style.background = 'var(--bg)'
   }, [theme])
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg)' }}>
       <Sidebar />
-      <main className="flex-1 overflow-y-auto">
+      <main style={{ flex: 1, overflowY: 'auto', background: 'var(--bg)' }}>
         <Outlet />
       </main>
     </div>

@@ -1,9 +1,9 @@
 import { saveAs } from 'file-saver'
 import * as XLSX from 'xlsx'
 
-export function downloadJSON(data, filename = 'freelance-hub-backup') {
+export function downloadJSON(data, filename) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-  saveAs(blob, `freelancehub-backup-${todayStr()}.json`)
+  saveAs(blob, filename || `freelancehub-backup-${todayStr()}.json`)
 }
 
 export function downloadCSV(rows, headers, filename) {

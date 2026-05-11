@@ -1,315 +1,143 @@
 import { useState, useRef } from 'react'
 import { useStore } from '../store/useStore'
-import { useI18n } from '../i18n'
-import Button from '../components/ui/Button'
-import Modal from '../components/ui/Modal'
-import { downloadJSON, downloadCSV, downloadExcel } from '../utils/export'
-import { THEMES, ACCENT_ICONS } from '../utils/icons'
+import { downloadJSON } from '../utils/export'
 
 const CURRENCIES = ['EUR', 'USD', 'GBP', 'CHF', 'CAD']
+const THEMES = ['indigo', 'violet', 'emerald', 'rose', 'amber', 'sky']
+const THEME_COLORS = { indigo: '#6366f1', violet: '#8b5cf6', emerald: '#10b981', rose: '#f43f5e', amber: '#f59e0b', sky: '#0ea5e9' }
 
 export default function Settings() {
-  const { t, lang, setLanguage } = useI18n()
-  const { settings, updateSettings, exportAll, importAll, resetAll, loadDemoData, clients, projects, transactions } = useStore()
-
+  const { settings, updateSettings, resetAll, loadDemoData, exportAll, importAll } = useStore()
   const [saved, setSaved] = useState(false)
-  const [confirmReset, setConfirmReset] = useState(false)
-  const [importError, setImportError] = useState(null)
-  const [importSuccess, setImportSuccess] = useState(false)
   const fileRef = useRef()
 
-  const [form, setForm] = useState({
-    businessName: settings.businessName || '',
-    ownerName: settings.ownerName || '',
-    currency: settings.currency || 'EUR',
-  })
+  const [form, setForm] = useState({ ...settings })
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
 
-  const handleSave = (e) => {
-    e.preventDefault()
+  const save = () => {
     updateSettings(form)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }
 
-  const handleExportJSON = () => {
-    downloadJSON(exportAll())
-  }
-
-  const handleExportExcel = () => {
-    downloadExcel(exportAll())
-  }
-
-  const handleExportClientsCSV = () => {
-    downloadCSV(
-      clients,
-      [
-        { key: 'name', label: 'Name' },
-        { key: 'email', label: 'Email' },
-        { key: 'phone', label: 'Phone' },
-        { key: 'company', label: 'Company' },
-        { key: 'status', label: 'Status' },
-        { key: 'notes', label: 'Notes' },
-      ],
-      'clients.csv'
-    )
-  }
-
-  const handleExportProjectsCSV = () => {
-    downloadCSV(
-      projects,
-      [
-        { key: 'title', label: 'Title' },
-        { key: 'status', label: 'Status' },
-        { key: 'rate', label: 'Rate' },
-        { key: 'currency', label: 'Currency' },
-        { key: 'dueDate', label: 'Due Date' },
-        { key: 'description', label: 'Description' },
-      ],
-      'projects.csv'
-    )
-  }
-
-  const handleExportTransactionsCSV = () => {
-    downloadCSV(
-      transactions,
-      [
-        { key: 'date', label: 'Date' },
-        { key: 'type', label: 'Type' },
-        { key: 'description', label: 'Description' },
-        { key: 'amount', label: 'Amount' },
-      ],
-      'transactions.csv'
-    )
+  const handleExport = () => {
+    const data = exportAll()
+    downloadJSON(data, `freelancehub-backup-${new Date().toISOString().split('T')[0]}.json`)
   }
 
   const handleImport = (e) => {
-    const file = e.target.files?.[0]
+    const file = e.target.files[0]
     if (!file) return
-    setImportError(null)
-    setImportSuccess(false)
     const reader = new FileReader()
     reader.onload = (ev) => {
       try {
         const data = JSON.parse(ev.target.result)
         importAll(data)
-        setImportSuccess(true)
-        setTimeout(() => setImportSuccess(false), 3000)
-      } catch {
-        setImportError(t('settings.importError'))
-      }
+        alert('Data imported successfully!')
+      } catch { alert('Invalid backup file.') }
     }
     reader.readAsText(file)
     e.target.value = ''
   }
 
-  const handleReset = () => {
-    resetAll()
-    setConfirmReset(false)
-  }
-
   return (
-    <div className="p-8 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-slate-800 mb-8">{t('settings.title')}</h1>
+    <div style={{ padding: '28px 32px', maxWidth: 760 }}>
+      <div style={{ marginBottom: 28 }}>
+        <h1 style={{ margin: '0 0 4px', fontSize: 22, fontWeight: 700, color: 'var(--t1)' }}>Settings</h1>
+        <div style={{ fontSize: 13, color: 'var(--t3)' }}>Business info, appearance & data management</div>
+      </div>
 
-      {/* Business info */}
-      <section className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
-        <h2 className="text-base font-semibold text-slate-700 mb-4">{t('settings.businessInfo')}</h2>
-        <form onSubmit={handleSave} className="space-y-4">
+      {/* Business Info */}
+      <div className="card" style={{ padding: '24px', marginBottom: 16 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)', marginBottom: 18 }}>Business Info</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.businessName')}</label>
-            <input
-              type="text"
-              value={form.businessName}
-              onChange={(e) => setForm((f) => ({ ...f, businessName: e.target.value }))}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--clr-500)]"
-            />
+            <label className="label">Your Name</label>
+            <input className="input" value={form.ownerName || ''} onChange={e => set('ownerName', e.target.value)} placeholder="Alex Rivera" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.ownerName')}</label>
-            <input
-              type="text"
-              value={form.ownerName}
-              onChange={(e) => setForm((f) => ({ ...f, ownerName: e.target.value }))}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--clr-500)]"
-            />
+            <label className="label">Business Name</label>
+            <input className="input" value={form.businessName || ''} onChange={e => set('businessName', e.target.value)} placeholder="Alex Rivera Studio" />
+          </div>
+          <div style={{ gridColumn: '1 / -1' }}>
+            <label className="label">Address (appears on invoices)</label>
+            <input className="input" value={form.address || ''} onChange={e => set('address', e.target.value)} placeholder="Mainstr. 32, Berlin" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{t('settings.currency')}</label>
-            <select
-              value={form.currency}
-              onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))}
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--clr-500)]"
-            >
-              {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
+            <label className="label">IBAN (appears on invoices)</label>
+            <input className="input" value={form.iban || ''} onChange={e => set('iban', e.target.value)} placeholder="DE89 3704 0044 …" />
+          </div>
+          <div>
+            <label className="label">VAT Number</label>
+            <input className="input" value={form.vatNumber || ''} onChange={e => set('vatNumber', e.target.value)} placeholder="DE123456789" />
+          </div>
+        </div>
+      </div>
+
+      {/* Finance settings */}
+      <div className="card" style={{ padding: '24px', marginBottom: 16 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)', marginBottom: 18 }}>Finance Settings</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 14 }}>
+          <div>
+            <label className="label">Currency</label>
+            <select className="input" value={form.currency || 'EUR'} onChange={e => set('currency', e.target.value)}>
+              {CURRENCIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <div className="flex items-center gap-3 pt-1">
-            <Button type="submit">{t('common.save')}</Button>
-            {saved && <span className="text-sm text-emerald-600 font-medium">{t('settings.saved')}</span>}
+          <div>
+            <label className="label">Default VAT Rate (%)</label>
+            <input className="input" type="number" value={form.vatRate ?? 20} onChange={e => set('vatRate', parseFloat(e.target.value) || 0)} min={0} max={100} />
           </div>
-        </form>
-      </section>
-
-      {/* Language */}
-      <section className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
-        <h2 className="text-base font-semibold text-slate-700 mb-4">{t('settings.language')}</h2>
-        <div className="flex gap-3">
-          {['en', 'fr'].map((l) => (
-            <button
-              key={l}
-              onClick={() => setLanguage(l)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border transition-colors ${
-                lang === l
-                  ? 'bg-[var(--clr-50)] border-[var(--clr-300)] text-[var(--clr-700)]'
-                  : 'border-slate-200 text-slate-600 hover:bg-slate-50'
-              }`}
-            >
-              <span>{l === 'en' ? '🇬🇧' : '🇫🇷'}</span>
-              {l === 'en' ? 'English' : 'Français'}
-            </button>
-          ))}
+          <div>
+            <label className="label">Tax Rate for reserve (%)</label>
+            <input className="input" type="number" value={form.taxRate ?? 25} onChange={e => set('taxRate', parseFloat(e.target.value) || 0)} min={0} max={100} />
+          </div>
+          <div>
+            <label className="label">Monthly Income Goal ({form.currency || 'EUR'})</label>
+            <input className="input" type="number" value={form.monthlyGoal || 5000} onChange={e => set('monthlyGoal', parseFloat(e.target.value) || 0)} min={0} />
+          </div>
         </div>
-      </section>
+      </div>
 
       {/* Appearance */}
-      <section className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
-        <h2 className="text-base font-semibold text-slate-700 mb-4">{t('settings.appearance')}</h2>
-
-        <div className="mb-5">
-          <p className="text-sm font-medium text-slate-700 mb-3">{t('settings.themeColor')}</p>
-          <div className="flex gap-2 flex-wrap">
-            {THEMES.map((th) => (
-              <button
-                key={th.key}
-                onClick={() => updateSettings({ theme: th.key })}
-                title={th.key}
-                className={`w-8 h-8 rounded-full border-2 transition-transform ${
-                  settings.theme === th.key ? 'border-slate-700 scale-110' : 'border-transparent hover:scale-105'
-                }`}
-                style={{ backgroundColor: th.color }}
-              />
-            ))}
-          </div>
+      <div className="card" style={{ padding: '24px', marginBottom: 16 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)', marginBottom: 18 }}>Accent Color</div>
+        <div style={{ display: 'flex', gap: 10 }}>
+          {THEMES.map(t => (
+            <button key={t} onClick={() => set('theme', t)} style={{
+              width: 32, height: 32, borderRadius: 8, border: form.theme === t ? `2px solid white` : '2px solid transparent',
+              background: THEME_COLORS[t], cursor: 'pointer', outline: form.theme === t ? '2px solid rgba(255,255,255,0.3)' : 'none',
+              outlineOffset: 2,
+            }} title={t} />
+          ))}
         </div>
+      </div>
 
-        <div>
-          <p className="text-sm font-medium text-slate-700 mb-3">{t('settings.appIcon')}</p>
-          <div className="flex gap-2 flex-wrap">
-            {Object.entries(ACCENT_ICONS).map(([key, path]) => (
-              <button
-                key={key}
-                onClick={() => updateSettings({ accentIcon: key })}
-                className={`w-10 h-10 rounded-xl border-2 flex items-center justify-center transition-colors ${
-                  (settings.accentIcon || 'bolt') === key
-                    ? 'border-[var(--clr-600)] bg-[var(--clr-50)]'
-                    : 'border-slate-200 hover:border-slate-300'
-                }`}
-              >
-                <svg
-                  className={`w-5 h-5 ${(settings.accentIcon || 'bolt') === key ? 'text-[var(--clr-600)]' : 'text-slate-500'}`}
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={path} />
-                </svg>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Save */}
+      <button className="btn-primary" onClick={save} style={{ marginBottom: 24, width: '100%', padding: '11px' }}>
+        {saved ? '✓ Saved' : 'Save Settings'}
+      </button>
 
       {/* Data management */}
-      <section className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
-        <h2 className="text-base font-semibold text-slate-700 mb-1">{t('settings.dataManagement')}</h2>
-        <p className="text-xs text-slate-400 mb-5">{t('settings.dataNote')}</p>
-
-        <div className="space-y-3">
-          <div className="flex items-center justify-between py-3 border-b border-slate-50">
-            <div>
-              <p className="text-sm font-medium text-slate-700">{t('settings.exportExcel')}</p>
-              <p className="text-xs text-slate-400">{t('settings.exportExcelDesc')}</p>
-            </div>
-            <Button variant="secondary" size="sm" onClick={handleExportExcel}>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              {t('settings.download')}
-            </Button>
+      <div className="card" style={{ padding: '24px' }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)', marginBottom: 18 }}>Data & Backup</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <button className="btn-ghost" onClick={handleExport} style={{ flex: 1 }}>⬇ Export backup (JSON)</button>
+            <button className="btn-ghost" onClick={() => fileRef.current?.click()} style={{ flex: 1 }}>⬆ Import backup</button>
+            <input ref={fileRef} type="file" accept=".json" style={{ display: 'none' }} onChange={handleImport} />
           </div>
-
-          <div className="flex items-center justify-between py-3 border-b border-slate-50">
-            <div>
-              <p className="text-sm font-medium text-slate-700">{t('settings.exportJSON')}</p>
-              <p className="text-xs text-slate-400">{t('settings.exportJSONDesc')}</p>
-            </div>
-            <Button variant="secondary" size="sm" onClick={handleExportJSON}>{t('settings.download')}</Button>
-          </div>
-
-          <div className="flex items-center justify-between py-3 border-b border-slate-50">
-            <div>
-              <p className="text-sm font-medium text-slate-700">{t('settings.exportClientsCSV')}</p>
-              <p className="text-xs text-slate-400">{clients.length} {t('nav.clients').toLowerCase()}</p>
-            </div>
-            <Button variant="secondary" size="sm" onClick={handleExportClientsCSV}>{t('settings.download')}</Button>
-          </div>
-
-          <div className="flex items-center justify-between py-3 border-b border-slate-50">
-            <div>
-              <p className="text-sm font-medium text-slate-700">{t('settings.exportProjectsCSV')}</p>
-              <p className="text-xs text-slate-400">{projects.length} {t('nav.projects').toLowerCase()}</p>
-            </div>
-            <Button variant="secondary" size="sm" onClick={handleExportProjectsCSV}>{t('settings.download')}</Button>
-          </div>
-
-          <div className="flex items-center justify-between py-3 border-b border-slate-50">
-            <div>
-              <p className="text-sm font-medium text-slate-700">{t('settings.exportTransactionsCSV')}</p>
-              <p className="text-xs text-slate-400">{transactions.length} {t('nav.finances').toLowerCase()}</p>
-            </div>
-            <Button variant="secondary" size="sm" onClick={handleExportTransactionsCSV}>{t('settings.download')}</Button>
-          </div>
-
-          <div className="flex items-center justify-between py-3">
-            <div>
-              <p className="text-sm font-medium text-slate-700">{t('settings.importJSON')}</p>
-              <p className="text-xs text-slate-400">{t('settings.importJSONDesc')}</p>
-              {importError && <p className="text-xs text-rose-500 mt-1">{importError}</p>}
-              {importSuccess && <p className="text-xs text-emerald-600 mt-1">{t('settings.importSuccess')}</p>}
-            </div>
-            <div>
-              <input ref={fileRef} type="file" accept=".json" className="hidden" onChange={handleImport} />
-              <Button variant="secondary" size="sm" onClick={() => fileRef.current?.click()}>{t('settings.import')}</Button>
-            </div>
-          </div>
+          <button className="btn-ghost" onClick={() => { loadDemoData(); alert('Demo data loaded!') }} style={{ width: '100%' }}>
+            Load Demo Data
+          </button>
+          <button className="btn-danger" onClick={() => { if (confirm('This will delete ALL your data. Are you sure?')) resetAll() }} style={{ width: '100%' }}>
+            Reset All Data
+          </button>
         </div>
-      </section>
-
-      {/* Demo data */}
-      <section className="bg-white rounded-2xl border border-[var(--clr-100)] shadow-sm p-6 mb-6">
-        <h2 className="text-base font-semibold text-[var(--clr-600)] mb-1">{t('settings.demoTitle')}</h2>
-        <p className="text-xs text-slate-400 mb-4">{t('settings.demoDesc')}</p>
-        <Button variant="secondary" onClick={loadDemoData}>
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-          </svg>
-          {t('settings.demoLoad')}
-        </Button>
-      </section>
-
-      {/* Danger zone */}
-      <section className="bg-white rounded-2xl border border-rose-100 shadow-sm p-6">
-        <h2 className="text-base font-semibold text-rose-600 mb-1">{t('settings.dangerZone')}</h2>
-        <p className="text-xs text-slate-400 mb-4">{t('settings.resetDesc')}</p>
-        <Button variant="danger" onClick={() => setConfirmReset(true)}>{t('settings.resetAll')}</Button>
-      </section>
-
-      {/* Reset confirm */}
-      <Modal open={confirmReset} onClose={() => setConfirmReset(false)} title={t('common.confirm')} size="sm">
-        <p className="text-slate-600 text-sm mb-6">{t('settings.resetConfirm')}</p>
-        <div className="flex gap-3">
-          <Button variant="danger" className="flex-1" onClick={handleReset}>{t('settings.resetAll')}</Button>
-          <Button variant="secondary" onClick={() => setConfirmReset(false)}>{t('common.cancel')}</Button>
+        <div style={{ marginTop: 14, fontSize: 12, color: 'var(--t3)', lineHeight: 1.6 }}>
+          All data is stored locally in your browser. Export a JSON backup regularly to keep your data safe and transfer between devices.
         </div>
-      </Modal>
+      </div>
     </div>
   )
 }

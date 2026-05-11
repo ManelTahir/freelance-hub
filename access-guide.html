@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FreelanceHub — Complete User Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      padding: 40px 20px;
+    }
+
+    .page {
+      width: 794px;
+      min-height: 1123px;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.10);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── COVER PAGE ─────────────────────────────── */
+    .cover {
+      min-height: 1123px;
+    }
+
+    .cover-header {
+      background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+      padding: 64px 56px 56px;
+      color: white;
+      flex: 1;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 56px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg { width: 24px; height: 24px; stroke: white; }
+    .logo-name { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+
+    .cover-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    .cover-header h1 {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .cover-header .subtitle {
+      font-size: 17px;
+      opacity: 0.8;
+      line-height: 1.6;
+      max-width: 500px;
+    }
+
+    .cover-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 48px;
+    }
+
+    .cover-feature {
+      background: rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cover-feature-dot {
+      width: 8px;
+      height: 8px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cover-feature span {
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .cover-footer {
+      padding: 28px 56px;
+      border-top: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cover-footer .url-label { font-size: 11px; color: #94a3b8; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .cover-footer .url { font-size: 15px; font-weight: 700; color: #4F46E5; }
+    .cover-footer .badge {
+      background: #EEF2FF;
+      color: #4F46E5;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;
+    }
+
+    /* ── CONTENT PAGES ──────────────────────────── */
+    .content-page {
+      min-height: 1123px;
+    }
+
+    .content-header {
+      background: #fafafa;
+      border-bottom: 1px solid #f1f5f9;
+      padding: 20px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .content-header .app-name { font-size: 13px; font-weight: 600; color: #94a3b8; }
+    .content-header .page-title { font-size: 13px; font-weight: 600; color: #4F46E5; }
+
+    .content-body {
+      padding: 48px 56px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* Section heading */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      background: #EEF2FF;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-icon svg { width: 18px; height: 18px; stroke: #4F46E5; }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e293b;
+      letter-spacing: -0.3px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* Description paragraphs */
+    .desc {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.7;
+    }
+
+    /* Feature list */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #334155;
+      line-height: 1.55;
+    }
+
+    .feature-item .bullet {
+      width: 20px;
+      height: 20px;
+      background: #4F46E5;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .feature-item .bullet svg { width: 11px; height: 11px; stroke: white; stroke-width: 2.5; }
+
+    /* Step cards */
+    .step-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .step-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 18px 20px;
+      border: 1px solid #f1f5f9;
+    }
+
+    .step-num {
+      width: 34px;
+      height: 34px;
+      background: #4F46E5;
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-card strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .step-card span {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    /* Info box */
+    .info-box {
+      background: #F5F3FF;
+      border-left: 4px solid #4F46E5;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+    }
+
+    .info-box .info-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #4F46E5;
+      margin-bottom: 6px;
+    }
+
+    .info-box p {
+      font-size: 13px;
+      color: #3730a3;
+      line-height: 1.6;
+    }
+
+    /* Warning box */
+    .warn-box {
+      background: #FFFBEB;
+      border-left: 4px solid #D97706;
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+    }
+
+    .warn-box .warn-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #D97706;
+      margin-bottom: 6px;
+    }
+
+    .warn-box p { font-size: 13px; color: #92400E; line-height: 1.6; }
+
+    /* URL block */
+    .url-block {
+      background: #F5F3FF;
+      border: 2px solid #4F46E5;
+      border-radius: 14px;
+      padding: 22px 26px;
+    }
+
+    .url-block .label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #4F46E5;
+      margin-bottom: 8px;
+    }
+
+    .url-block .url {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1e1b4b;
+    }
+
+    .url-block .hint {
+      font-size: 12px;
+      color: #6D28D9;
+      margin-top: 6px;
+    }
+
+    /* Two column grid */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .mini-card {
+      background: #f8fafc;
+      border: 1px solid #f1f5f9;
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+
+    .mini-card .mini-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .mini-card .mini-dot {
+      width: 8px;
+      height: 8px;
+      background: #4F46E5;
+      border-radius: 50%;
+    }
+
+    .mini-card p {
+      font-size: 12.5px;
+      color: #64748b;
+      line-height: 1.55;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    /* Content footer */
+    .content-footer {
+      padding: 20px 56px;
+      border-top: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .content-footer p { font-size: 11px; color: #cbd5e1; }
+
+    @media print {
+      @page { size: A4; margin: 0; }
+
+      html, body {
+        background: white !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        display: block !important;
+        width: 210mm;
+      }
+
+      .page {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: unset !important;
+        max-height: 297mm !important;
+        overflow: hidden !important;
+        break-after: page;
+        page-break-after: always;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      .page:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+
+      .cover-header {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PAGE 1 — COVER                            -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="page cover">
+    <div class="cover-header">
+      <div class="logo-row">
+        <div class="logo-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <span class="logo-name">FreelanceHub</span>
+      </div>
+
+      <div class="cover-tag">Complete User Guide</div>
+      <h1>Your freelance business,<br>under control.</h1>
+      <p class="subtitle">FreelanceHub is an all-in-one web app to manage your clients, projects, and finances — entirely in your browser, with zero servers and zero subscriptions.</p>
+
+      <div class="cover-features">
+        <div class="cover-feature">
+          <div class="cover-feature-dot"></div>
+          <span>Client Manager</span>
+        </div>
+        <div class="cover-feature">
+          <div class="cover-feature-dot"></div>
+          <span>Project Pipeline (Kanban)</span>
+        </div>
+        <div class="cover-feature">
+          <div class="cover-feature-dot"></div>
+          <span>Invoices & Proposals</span>
+        </div>
+        <div class="cover-feature">
+          <div class="cover-feature-dot"></div>
+          <span>Time Tracking</span>
+        </div>
+        <div class="cover-feature">
+          <div class="cover-feature-dot"></div>
+          <span>Finance Tracker & Tax Summary</span>
+        </div>
+        <div class="cover-feature">
+          <div class="cover-feature-dot"></div>
+          <span>Deal Pipeline</span>
+        </div>
+        <div class="cover-feature">
+          <div class="cover-feature-dot"></div>
+          <span>Export Excel / CSV / JSON</span>
+        </div>
+        <div class="cover-feature">
+          <div class="cover-feature-dot"></div>
+          <span>100% Private — No cloud</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div>
+        <div class="url-label">Your app link</div>
+        <div class="url">https://freelance-hub-eta.vercel.app</div>
+      </div>
+      <div class="badge">Buy once · Use forever</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PAGE 2 — GETTING STARTED                  -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="page content-page">
+    <div class="content-header">
+      <span class="app-name">FreelanceHub</span>
+      <span class="page-title">Getting Started</span>
+    </div>
+
+    <div class="content-body">
+
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">What is FreelanceHub?</div>
+            <div class="section-subtitle">An overview of what the app does and who it's for</div>
+          </div>
+        </div>
+
+        <p class="desc">FreelanceHub is a web application designed for independent workers — designers, developers, photographers, writers, consultants — who need to keep track of their clients, ongoing projects, and finances without the complexity of traditional software.</p>
+
+        <p class="desc" style="margin-top:12px;">Unlike most tools, <strong style="color:#1e293b;">FreelanceHub requires no account, no installation, and no monthly fee.</strong> It opens directly in your browser and all your data is stored locally on your device. Nothing is ever sent to an external server.</p>
+
+        <div class="info-box" style="margin-top:18px;">
+          <div class="info-title">💡 How data storage works</div>
+          <p>FreelanceHub uses your browser's built-in localStorage — a secure space on your own device. Think of it like a notebook that lives inside your browser. Your data stays there even when you close the tab, as long as you don't clear your browser data.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Access the app</div>
+            <div class="section-subtitle">Open and bookmark your personal link</div>
+          </div>
+        </div>
+
+        <div class="url-block" style="margin-bottom:20px;">
+          <div class="label">🔗 Your app link</div>
+          <div class="url">https://freelance-hub-eta.vercel.app</div>
+          <div class="hint">Bookmark this in your browser for quick daily access.</div>
+        </div>
+
+        <div class="step-cards">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div>
+              <strong>Open the link in your browser</strong>
+              <span>Works on Chrome, Firefox, Safari, and Edge — on desktop or tablet. No installation needed.</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div>
+              <strong>Click "Open the App" on the welcome screen</strong>
+              <span>You'll land directly on your Dashboard. No login, no form to fill — you're already inside.</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div>
+              <strong>Explore with demo data or start fresh</strong>
+              <span>Go to Settings → "Load demo data" to see the app populated with sample clients, projects and transactions. Or just start adding your own right away.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="content-footer">
+      <p>FreelanceHub · Complete User Guide</p>
+      <p>Page 2</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PAGE 3 — CLIENTS & PROJECTS               -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="page content-page">
+    <div class="content-header">
+      <span class="app-name">FreelanceHub</span>
+      <span class="page-title">Clients & Projects</span>
+    </div>
+
+    <div class="content-body">
+
+      <!-- CLIENTS -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Client Manager</div>
+            <div class="section-subtitle">Keep all your client information in one place</div>
+          </div>
+        </div>
+
+        <p class="desc">The Clients section is your contact book. For each client you can store their name, email, phone number, company, status, and personal notes.</p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Add a client</strong> — click "Add Client" at the top right and fill in their details. Only the name is required.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Client status</strong> — mark each client as Active, Inactive, or Prospect to filter your list quickly.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Notes</strong> — use the notes field for anything useful: billing preferences, time zones, communication style, contract details.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Search & filter</strong> — use the search bar or the status filter (All / Active / Inactive / Prospect) to find clients instantly.</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- PROJECTS -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Project Pipeline</div>
+            <div class="section-subtitle">A visual Kanban board from first contact to final payment</div>
+          </div>
+        </div>
+
+        <p class="desc">Projects are organized in a Kanban board with four columns that represent the lifecycle of a freelance project:</p>
+
+        <div class="two-col" style="margin-top:14px;">
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot"></div> To Do</div>
+            <p>Projects that are planned but not yet started. Use this for confirmed work you haven't begun.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot" style="background:#F59E0B"></div> In Progress</div>
+            <p>Active projects you are currently working on. Move cards here as soon as you start.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot" style="background:#8B5CF6"></div> Delivered</div>
+            <p>Work that has been submitted to the client but not yet paid. Awaiting invoice settlement.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot" style="background:#059669"></div> Paid</div>
+            <p>Completed and paid projects. Your archive of finished work.</p>
+          </div>
+        </div>
+
+        <div class="feature-list" style="margin-top:16px;">
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Move a project</strong> — click the arrow button on a project card to advance it to the next stage.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Link to a client</strong> — assign each project to one of your saved clients for easy tracking.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Rate & due date</strong> — optionally add a budget and deadline so you never miss an important date.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="content-footer">
+      <p>FreelanceHub · Complete User Guide</p>
+      <p>Page 3</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PAGE 4 — FINANCES & DASHBOARD             -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="page content-page">
+    <div class="content-header">
+      <span class="app-name">FreelanceHub</span>
+      <span class="page-title">Finances & Dashboard</span>
+    </div>
+
+    <div class="content-body">
+
+      <!-- FINANCES -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Finance Tracker</div>
+            <div class="section-subtitle">Log income and expenses, track your real balance</div>
+          </div>
+        </div>
+
+        <p class="desc">The Finances section lets you record every income and expense related to your freelance activity. At the top you always see three live numbers: total income, total expenses, and your current balance.</p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Add income</strong> — click "Add Income" and enter the amount, a description, date, and optionally the project it belongs to. Example: "Client invoice — Website redesign — $2,400".</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Add expense</strong> — record business costs like software subscriptions, equipment, or subcontractors. Example: "Adobe CC subscription — $55".</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Monthly chart</strong> — a bar chart shows your income vs. expenses over the last 6 months so you can spot trends at a glance.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Filter & search</strong> — filter by type (income / expense) or search by description to find any transaction quickly.</span>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:18px;">
+          <div class="info-title">💡 Tip — Link transactions to projects</div>
+          <p>When adding income, link it to the corresponding project. This way you can track exactly which projects have been paid and which are still pending, directly from the project board.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- DASHBOARD -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Dashboard</div>
+            <div class="section-subtitle">Your business at a glance — updated in real time</div>
+          </div>
+        </div>
+
+        <p class="desc">The Dashboard is your home screen. Every time you open the app, it shows you the four numbers that matter most right now:</p>
+
+        <div class="two-col" style="margin-top:14px; margin-bottom:16px;">
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot"></div> Income this month</div>
+            <p>Total income recorded in the current calendar month.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot"></div> Active clients</div>
+            <p>Number of clients currently marked as "Active" in your client list.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot"></div> Active projects</div>
+            <p>Projects in "To Do" or "In Progress" status — work currently in motion.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot"></div> Paid this month</div>
+            <p>Income transactions dated in the current month that are marked as paid.</p>
+          </div>
+        </div>
+
+        <p class="desc">Click any stat card to navigate directly to that section. The income chart at the bottom shows your last 6 months of activity.</p>
+      </div>
+
+    </div>
+
+    <div class="content-footer">
+      <p>FreelanceHub · Complete User Guide</p>
+      <p>Page 4</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PAGE 5 — NEW TOOLS                        -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="page content-page">
+    <div class="content-header">
+      <span class="app-name">FreelanceHub</span>
+      <span class="page-title">Invoices, Time Tracking & More</span>
+    </div>
+
+    <div class="content-body">
+
+      <!-- INVOICES -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Invoices</div>
+            <div class="section-subtitle">Create, send, and track professional invoices</div>
+          </div>
+        </div>
+
+        <p class="desc">The Invoices section lets you generate professional invoices directly from the app. Add line items with quantities and rates, set a VAT rate, and choose from Draft, Sent, Paid, or Overdue status. You can print or save each invoice as a PDF straight from the browser.</p>
+
+        <div class="two-col" style="margin-top:14px;">
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot"></div> Proposals</div>
+            <p>Create project proposals with line items and estimated totals. Track their status (Draft, Sent, Accepted, Declined) and convert them to projects once accepted.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot" style="background:#0d9488"></div> Recurring Items</div>
+            <p>Log your recurring income and expenses (subscriptions, retainers). FreelanceHub shows you your predictable monthly cash flow at a glance.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- TIME TRACKING -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Time Tracking</div>
+            <div class="section-subtitle">Log hours, calculate earnings, stay on budget</div>
+          </div>
+        </div>
+
+        <p class="desc">Track time spent on each project. Log entries manually or use the built-in timer. Each entry is linked to a project and client, and the app automatically calculates earnings based on your hourly rate.</p>
+
+        <div class="info-box" style="margin-top:16px;">
+          <div class="info-title">💡 Tip — Rate Calculator</div>
+          <p>Use the <strong>Rate Calculator</strong> tool (under Tools in the sidebar) to find your ideal hourly or daily rate based on your target income, working days, and expenses. It factors in vacation time and overhead so you don't undercharge.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- PIPELINE + NOTES + TAX -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Deal Pipeline, Tax Summary & Notes</div>
+            <div class="section-subtitle">Three more tools to run a complete freelance business</div>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-top:4px;">
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot" style="background:#7c3aed"></div> Deal Pipeline</div>
+            <p>Track potential leads and deals with probability percentages. See your weighted pipeline value at a glance — know exactly how much work might be coming your way.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot" style="background:#d97706"></div> Tax Summary</div>
+            <p>Get an instant overview of your taxable income, estimated tax due, and deductible expenses for the year. No accountant needed for a quick check.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot" style="background:#0284c7"></div> Notes</div>
+            <p>A scratchpad for ideas, meeting notes, client briefings, or anything you want to keep handy. Organized with titles and searchable.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mini-title"><div class="mini-dot" style="background:#059669"></div> Dashboard</div>
+            <p>Your home screen aggregates all of the above: income this month, active projects, pipeline value, hours logged this week — all in one place, updated in real time.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="content-footer">
+      <p>FreelanceHub · Complete User Guide</p>
+      <p>Page 5</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PAGE 6 — DATA & SETTINGS                  -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="page content-page">
+    <div class="content-header">
+      <span class="app-name">FreelanceHub</span>
+      <span class="page-title">Saving Your Data &amp; Settings</span>
+    </div>
+
+    <div class="content-body">
+
+      <!-- DATA -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Saving & backing up your data</div>
+            <div class="section-subtitle">How to keep your data safe and transfer it between devices</div>
+          </div>
+        </div>
+
+        <p class="desc">FreelanceHub automatically saves every change you make to your browser's localStorage — you never need to click "Save" for your data. However, localStorage is tied to a specific browser on a specific device. To keep your data safe long-term, use the export options in Settings.</p>
+
+        <div class="step-cards" style="margin-top:16px;">
+          <div class="step-card">
+            <div class="step-num" style="background:#059669;">↓</div>
+            <div>
+              <strong>Export all data (JSON) — recommended backup</strong>
+              <span>Settings → "Export all data (JSON)". This downloads a single file containing all your clients, projects, and transactions. Keep this file somewhere safe (Google Drive, Dropbox, email to yourself). Use it to restore your data on any device.</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:#059669;">↑</div>
+            <div>
+              <strong>Import data (JSON) — restore or transfer</strong>
+              <span>Settings → "Import data (JSON)". Select your backup file and all your data will be restored instantly. Use this to switch browsers, switch devices, or recover from an accidental reset.</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:#0284C7;">xls</div>
+            <div>
+              <strong>Export to Excel (.xlsx)</strong>
+              <span>Settings → "Export to Excel". Generates a spreadsheet with three sheets: Clients, Projects, and Transactions. Useful for sharing with an accountant or creating reports.</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num" style="background:#64748b;">csv</div>
+            <div>
+              <strong>Export individual CSVs</strong>
+              <span>Export clients, projects, or transactions separately as CSV files — compatible with Excel, Google Sheets, and most accounting tools.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="warn-box" style="margin-top:18px;">
+          <div class="warn-title">⚠️ Important — protect your data</div>
+          <p>If you clear your browser history, cookies, or site data, localStorage will be erased. Export a JSON backup regularly — at least once a week — so you never lose your records. Store the backup file in a cloud folder for extra safety.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- SETTINGS -->
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Personalizing the app</div>
+            <div class="section-subtitle">Language, currency, colors, and icons</div>
+          </div>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Business info</strong> — enter your name, business name, and preferred currency (EUR, USD, GBP, CHF, CAD). All amounts in the app will display in your chosen currency.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Language</strong> — switch between English and French at any time. The change applies immediately across the entire app.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>Accent color</strong> — choose from 6 color themes (Indigo, Violet, Rose, Emerald, Amber, Sky). The sidebar, buttons, and highlights all update instantly.</span>
+          </div>
+          <div class="feature-item">
+            <div class="bullet"><svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+            <span><strong>App icon</strong> — pick one of 6 icons displayed in the sidebar logo area to make the app feel like yours.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="content-footer">
+      <p>FreelanceHub · Complete User Guide</p>
+      <p>Page 6</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PAGE 7 — FAQ & SUPPORT                    -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="page content-page">
+    <div class="content-header">
+      <span class="app-name">FreelanceHub</span>
+      <span class="page-title">FAQ & Support</span>
+    </div>
+
+    <div class="content-body">
+
+      <div>
+        <div class="section-label">
+          <div class="section-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <div class="section-title">Frequently Asked Questions</div>
+          </div>
+        </div>
+
+        <div class="step-cards">
+          <div class="step-card" style="background:white; border:1px solid #f1f5f9;">
+            <div class="step-num" style="background:#EEF2FF; color:#4F46E5; font-size:18px; font-weight:800;">?</div>
+            <div>
+              <strong>Will my data be there when I come back tomorrow?</strong>
+              <span>Yes — as long as you don't clear your browser's site data or use private/incognito mode. For safety, export a JSON backup from Settings regularly.</span>
+            </div>
+          </div>
+          <div class="step-card" style="background:white; border:1px solid #f1f5f9;">
+            <div class="step-num" style="background:#EEF2FF; color:#4F46E5; font-size:18px; font-weight:800;">?</div>
+            <div>
+              <strong>Can I use the app on multiple devices?</strong>
+              <span>Yes — export a JSON backup from one device, then import it on the other. The app is not synced automatically between devices since there is no server.</span>
+            </div>
+          </div>
+          <div class="step-card" style="background:white; border:1px solid #f1f5f9;">
+            <div class="step-num" style="background:#EEF2FF; color:#4F46E5; font-size:18px; font-weight:800;">?</div>
+            <div>
+              <strong>Does it work offline?</strong>
+              <span>The app needs a connection to load the first time. After that, most modern browsers cache it and it may work partially offline, but an internet connection is recommended for the best experience.</span>
+            </div>
+          </div>
+          <div class="step-card" style="background:white; border:1px solid #f1f5f9;">
+            <div class="step-num" style="background:#EEF2FF; color:#4F46E5; font-size:18px; font-weight:800;">?</div>
+            <div>
+              <strong>Can I share access with a colleague or VA?</strong>
+              <span>Simply share your app link and send them your JSON backup file. They import it and they'll have the same data. Note that changes won't sync automatically between two users.</span>
+            </div>
+          </div>
+          <div class="step-card" style="background:white; border:1px solid #f1f5f9;">
+            <div class="step-num" style="background:#EEF2FF; color:#4F46E5; font-size:18px; font-weight:800;">?</div>
+            <div>
+              <strong>Is my data private? Who can see it?</strong>
+              <span>Only you. Data is stored exclusively in your browser's localStorage. No one — not even the app developer — has access to it.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div style="text-align:center; padding: 24px 0 8px;">
+        <div style="width:56px; height:56px; background:linear-gradient(135deg,#4F46E5,#7C3AED); border-radius:16px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+          <svg style="width:28px;height:28px;stroke:white;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <div style="font-size:20px;font-weight:800;color:#1e293b;letter-spacing:-0.3px;margin-bottom:8px;">Thank you for your purchase!</div>
+        <div style="font-size:14px;color:#64748b;line-height:1.6;max-width:400px;margin:0 auto 24px;">If you have any questions or run into any issues, message me on Etsy and I'll get back to you within 24 hours.</div>
+        <div style="display:inline-block;background:#EEF2FF;color:#4F46E5;font-size:13px;font-weight:600;padding:10px 24px;border-radius:999px;">
+          https://freelance-hub-eta.vercel.app
+        </div>
+      </div>
+
+    </div>
+
+    <div class="content-footer">
+      <p>FreelanceHub · Complete User Guide</p>
+      <p>Page 7</p>
+    </div>
+  </div>
+
+</body>
+</html>
