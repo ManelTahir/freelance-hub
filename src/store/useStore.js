@@ -165,7 +165,7 @@ export const useStore = create(
           { id: 3, title: 'Weekly Review', content: '' }, { id: 4, title: 'Client Notes', content: '' },
           { id: 5, title: 'Resources', content: '' }, { id: 6, title: 'Misc', content: '' },
         ],
-        settings: { currency: 'EUR', businessName: '', ownerName: '', theme: 'indigo', accentIcon: 'bolt', address: '', iban: '', vatNumber: '', vatRate: 20, monthlyGoal: 5000, taxRate: 25 },
+        settings: { currency: 'EUR', businessName: '', ownerName: '', theme: 'indigo', accentIcon: 'bolt', address: '', iban: '', bic: '', vatNumber: '', website: '', vatRate: 20, monthlyGoal: 5000, taxRate: 25 },
       }),
 
       loadDemoData: () => {

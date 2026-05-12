@@ -68,8 +68,16 @@ export default function Settings() {
             <input className="input" value={form.iban || ''} onChange={e => set('iban', e.target.value)} placeholder="DE89 3704 0044 …" />
           </div>
           <div>
-            <label className="label">VAT Number</label>
+            <label className="label">BIC / SWIFT</label>
+            <input className="input" value={form.bic || ''} onChange={e => set('bic', e.target.value)} placeholder="SSKMDEMMXXX" />
+          </div>
+          <div>
+            <label className="label">VAT Number (Ust-IdNr.)</label>
             <input className="input" value={form.vatNumber || ''} onChange={e => set('vatNumber', e.target.value)} placeholder="DE123456789" />
+          </div>
+          <div>
+            <label className="label">Website</label>
+            <input className="input" value={form.website || ''} onChange={e => set('website', e.target.value)} placeholder="www.myfreelance.com" />
           </div>
         </div>
       </div>

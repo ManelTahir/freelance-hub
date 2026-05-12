@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useStore } from '../store/useStore'
 
 const STATUS = {
@@ -116,76 +116,123 @@ function InvoiceForm({ inv, onClose, clients, settings }) {
   )
 }
 
-function InvoicePrint({ inv, clients, settings }) {
+function InvoicePrint({ inv, clients, settings, preview = false }) {
   const client = clients.find(c => c.id === inv.clientId)
   const { subtotal, vat, total } = calcTotals(inv.items, inv.vatRate || 0)
-  const { businessName = '', address = '', iban = '', vatNumber = '', currency = 'EUR' } = settings
+  const { businessName = '', ownerName = '', address = '', iban = '', bic = '', vatNumber = '', website = '', currency = 'EUR' } = settings
+
+  const senderName = businessName || ownerName
 
   return (
-    <div id="invoice-print-area" style={{ fontFamily: 'Arial, sans-serif', color: '#111', fontSize: 14 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 40 }}>
-        <div>
-          <div style={{ fontSize: 28, fontWeight: 900, letterSpacing: -1 }}>INVOICE</div>
-          <div style={{ color: '#666', marginTop: 4 }}>{inv.number}</div>
+    <div id={preview ? undefined : 'invoice-print-area'} style={{
+      fontFamily: "'Helvetica Neue', Arial, sans-serif",
+      color: '#1a1a1a',
+      fontSize: 13,
+      background: '#ffffff',
+      padding: '60px 68px',
+      maxWidth: 780,
+    }}>
+
+      {/* ── Header: large title + business info stacked below ── */}
+      <div style={{ marginBottom: 32 }}>
+        <div style={{ fontSize: 44, fontWeight: 700, letterSpacing: '-0.01em', textTransform: 'uppercase', lineHeight: 1, color: '#1a1a1a', marginBottom: 10 }}>
+          Invoice
         </div>
-        <div style={{ textAlign: 'right', fontSize: 13 }}>
-          <div style={{ fontWeight: 700, fontSize: 16 }}>{businessName}</div>
-          {address && <div style={{ color: '#555' }}>{address}</div>}
-          {vatNumber && <div style={{ color: '#555' }}>VAT {vatNumber}</div>}
-        </div>
+        {senderName && (
+          <div style={{ fontSize: 11, color: '#aaa', letterSpacing: '0.03em', lineHeight: 1.6 }}>
+            {senderName}{address ? ` · ${address}` : ''}
+          </div>
+        )}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30, marginBottom: 36 }}>
-        <div>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: '#999', marginBottom: 6 }}>Bill To</div>
-          <div style={{ fontWeight: 600 }}>{client?.name || '—'}</div>
-          {client?.company && <div style={{ color: '#555' }}>{client.company}</div>}
-          {client?.email && <div style={{ color: '#555' }}>{client.email}</div>}
+      {/* ── Date + Invoice number ── */}
+      <div style={{ fontSize: 13, color: '#444', lineHeight: 2, marginBottom: 4 }}>
+        <div>{inv.issuedDate}</div>
+        <div style={{ fontWeight: 600, fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.09em', color: '#333' }}>
+          Invoice No. {inv.number}
         </div>
-        <div>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: '#999', marginBottom: 6 }}>Details</div>
-          <div>Date: {inv.issuedDate}</div>
-          {inv.dueDate && <div>Due: {inv.dueDate}</div>}
-          <div style={{ fontWeight: 600, color: inv.status === 'overdue' ? '#e11d48' : '#111' }}>Status: {STATUS[inv.status]?.label}</div>
-        </div>
+        {inv.dueDate && <div style={{ fontSize: 12, color: '#999' }}>Due {inv.dueDate}</div>}
+      </div>
+      <div style={{ borderTop: '1px solid #d8d5cf', margin: '18px 0 32px' }} />
+
+      {/* ── Client block ── */}
+      <div style={{ marginBottom: 48 }}>
+        <div style={{ fontWeight: 700, fontSize: 14, color: '#1a1a1a', marginBottom: 4 }}>{client?.name || '—'}</div>
+        {client?.company && <div style={{ color: '#555', fontSize: 13 }}>{client.company}</div>}
+        {client?.email   && <div style={{ color: '#777', fontSize: 13 }}>{client.email}</div>}
+        {client?.address && <div style={{ color: '#777', fontSize: 13 }}>{client.address}</div>}
       </div>
 
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 24 }}>
+      {/* ── Line items table ── */}
+      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
-          <tr style={{ borderBottom: '2px solid #111' }}>
-            <th style={{ textAlign: 'left', padding: '8px 0', fontSize: 11, textTransform: 'uppercase', letterSpacing: '.06em', color: '#777' }}>Description</th>
-            <th style={{ textAlign: 'center', padding: '8px 0', fontSize: 11, textTransform: 'uppercase', letterSpacing: '.06em', color: '#777', width: 60 }}>Qty</th>
-            <th style={{ textAlign: 'right', padding: '8px 0', fontSize: 11, textTransform: 'uppercase', letterSpacing: '.06em', color: '#777', width: 100 }}>Rate</th>
-            <th style={{ textAlign: 'right', padding: '8px 0', fontSize: 11, textTransform: 'uppercase', letterSpacing: '.06em', color: '#777', width: 100 }}>Amount</th>
+          <tr style={{ background: '#f0ede8' }}>
+            <th style={{ textAlign: 'left',   padding: '11px 14px', fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#777' }}>Description</th>
+            <th style={{ textAlign: 'center', padding: '11px 14px', fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#777', width: 56 }}>Qty</th>
+            <th style={{ textAlign: 'right',  padding: '11px 14px', fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#777', width: 110 }}>Price</th>
+            <th style={{ textAlign: 'right',  padding: '11px 14px', fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#777', width: 110 }}>Amount</th>
           </tr>
         </thead>
         <tbody>
           {(inv.items || []).map((item, i) => (
-            <tr key={i} style={{ borderBottom: '1px solid #eee' }}>
-              <td style={{ padding: '10px 0' }}>{item.description}</td>
-              <td style={{ textAlign: 'center', padding: '10px 0', color: '#555' }}>{item.qty || 1}</td>
-              <td style={{ textAlign: 'right', padding: '10px 0', color: '#555' }}>{fmt((item.rate || 0), currency)}</td>
-              <td style={{ textAlign: 'right', padding: '10px 0', fontWeight: 500 }}>{fmt((item.qty || 1) * (item.rate || 0), currency)}</td>
+            <tr key={i} style={{ borderBottom: '1px solid #eae7e1' }}>
+              <td style={{ padding: '13px 14px', color: '#222' }}>{item.description}</td>
+              <td style={{ textAlign: 'center', padding: '13px 14px', color: '#777' }}>{item.qty || 1}</td>
+              <td style={{ textAlign: 'right',  padding: '13px 14px', color: '#777' }}>{fmt(item.rate || 0, currency)}</td>
+              <td style={{ textAlign: 'right',  padding: '13px 14px', color: '#1a1a1a', fontWeight: 500 }}>{fmt((item.qty || 1) * (item.rate || 0), currency)}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <div style={{ width: 240 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', color: '#555' }}><span>Subtotal</span><span>{fmt(subtotal, currency)}</span></div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', color: '#555' }}><span>VAT ({inv.vatRate || 0}%)</span><span>{fmt(vat, currency)}</span></div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0 6px', fontWeight: 700, fontSize: 16, borderTop: '2px solid #111', marginTop: 4 }}><span>Total Due</span><span>{fmt(total, currency)}</span></div>
+      {/* ── Totals ── */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 22, marginBottom: 48 }}>
+        <div style={{ width: 252 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', color: '#777', fontSize: 12 }}>
+            <span>Subtotal</span><span>{fmt(subtotal, currency)}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', color: '#777', fontSize: 12 }}>
+            <span>VAT ({inv.vatRate || 0}%)</span><span>{fmt(vat, currency)}</span>
+          </div>
+          <div style={{ borderTop: '1px solid #1a1a1a', marginTop: 10, paddingTop: 11, display: 'flex', justifyContent: 'space-between', fontWeight: 800, fontSize: 14, color: '#1a1a1a', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+            <span>Total</span><span>{fmt(total, currency)}</span>
+          </div>
         </div>
       </div>
 
-      {iban && (
-        <div style={{ marginTop: 32, padding: '14px 16px', background: '#f8f8f8', borderRadius: 8, fontSize: 12 }}>
-          <div style={{ fontWeight: 700, marginBottom: 4 }}>Payment Details</div>
-          <div>IBAN: {iban}</div>
+      {/* ── Bottom: notes left | info blocks right (matches reference layout) ── */}
+      <div style={{ borderTop: '1px solid #d8d5cf', paddingTop: 24, display: 'flex', gap: 48, alignItems: 'flex-start' }}>
+
+        {/* Left: payment notes / instructions */}
+        <div style={{ flex: '0 0 42%', fontSize: 12, color: '#666', lineHeight: 1.85, fontStyle: 'italic' }}>
+          {inv.notes || ''}
         </div>
-      )}
-      {inv.notes && <div style={{ marginTop: 20, fontSize: 12, color: '#777', textAlign: 'center' }}>{inv.notes}</div>}
+
+        {/* Right: 3 stacked info blocks — always visible */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+
+          {/* Block 1 – business identity & VAT */}
+          <div style={{ fontSize: 11, color: '#666', lineHeight: 1.85 }}>
+            <div style={{ fontWeight: 700, color: '#1a1a1a', fontSize: 12, marginBottom: 1 }}>{senderName || '—'}</div>
+            <div>VAT No.: {vatNumber || '—'}</div>
+          </div>
+
+          {/* Block 2 – bank details */}
+          <div style={{ fontSize: 11, color: '#666', lineHeight: 1.85 }}>
+            <div style={{ fontWeight: 700, color: '#1a1a1a', fontSize: 12, marginBottom: 1 }}>Bank</div>
+            <div>IBAN: {iban || '—'}</div>
+            <div>BIC: {bic || '—'}</div>
+          </div>
+
+          {/* Block 3 – contact */}
+          <div style={{ fontSize: 11, color: '#666', lineHeight: 1.85 }}>
+            <div style={{ fontWeight: 700, color: '#1a1a1a', fontSize: 12, marginBottom: 1 }}>Contact</div>
+            <div>{website || '—'}</div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   )
 }
@@ -208,14 +255,42 @@ export default function Invoices() {
 
   const handlePrint = (inv) => {
     setPrintInv(inv)
-    setTimeout(() => window.print(), 150)
+  }
+
+  const doPrint = () => {
+    window.print()
   }
 
   const fmt0 = (n) => fmt(n, settings.currency)
 
   return (
     <div style={{ padding: '28px 32px', maxWidth: 1000 }}>
-      {printInv && <InvoicePrint inv={printInv} clients={clients} settings={settings} />}
+      {/* ── Print preview modal ── */}
+      {printInv && (
+        <>
+          {/* hidden element for actual browser print */}
+          <InvoicePrint inv={printInv} clients={clients} settings={settings} />
+          {/* preview overlay — hidden when printing */}
+          <div className="overlay" id="print-preview-overlay" onClick={e => { if (e.target === e.currentTarget) setPrintInv(null) }}>
+            <div style={{ background: '#fff', borderRadius: 16, width: '90vw', maxWidth: 860, maxHeight: '92vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 24px 80px rgba(0,0,0,0.25)' }}>
+              {/* toolbar */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 20px', borderBottom: '1px solid #eee', flexShrink: 0 }}>
+                <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--t1)' }}>Invoice preview — {printInv.number}</div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button className="btn-primary" style={{ padding: '7px 18px', fontSize: 13 }} onClick={doPrint}>🖨️ Print / Save as PDF</button>
+                  <button className="btn-ghost" style={{ padding: '7px 12px', fontSize: 13 }} onClick={() => setPrintInv(null)}>✕ Close</button>
+                </div>
+              </div>
+              {/* scrollable preview */}
+              <div style={{ overflowY: 'auto', flex: 1, background: '#dedad4', padding: '40px 0', display: 'flex', justifyContent: 'center' }}>
+                <div style={{ background: '#ffffff', boxShadow: '0 6px 32px rgba(0,0,0,0.22)', borderRadius: 2, width: 780, minHeight: 1060 }}>
+                  <InvoicePrint inv={printInv} clients={clients} settings={settings} preview />
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <div>

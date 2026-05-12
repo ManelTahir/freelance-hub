@@ -123,7 +123,7 @@ export default function Finances() {
     return (
       <div style={{ background: 'var(--card2)', border: '1px solid var(--border)', borderRadius: 8, padding: '10px 14px', fontSize: 12 }}>
         <div style={{ color: 'var(--t2)', marginBottom: 4 }}>{label}</div>
-        {payload.map(p => <div key={p.dataKey} style={{ color: p.dataKey === 'income' ? 'var(--green)' : 'var(--red)' }}>{p.dataKey}: {fmt0(p.value)}</div>)}
+        {payload.map(p => <div key={p.dataKey} style={{ color: p.dataKey === 'income' ? 'var(--accent)' : 'var(--t2)' }}>{p.dataKey}: {fmt0(p.value)}</div>)}
       </div>
     )
   }
@@ -158,8 +158,8 @@ export default function Finances() {
             <XAxis dataKey="name" tick={{ fontSize: 11, fill: 'var(--t3)' }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fontSize: 10, fill: 'var(--t3)' }} axisLine={false} tickLine={false} tickFormatter={v => v >= 1000 ? `${(v/1000).toFixed(0)}k` : v} />
             <Tooltip content={<TT />} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
-            <Bar dataKey="income" fill="var(--green)" radius={[3,3,0,0]} maxBarSize={22} />
-            <Bar dataKey="expense" fill="var(--red)" opacity={.55} radius={[3,3,0,0]} maxBarSize={22} />
+            <Bar dataKey="income" fill="var(--accent)" radius={[3,3,0,0]} maxBarSize={22} />
+            <Bar dataKey="expense" fill="var(--t3)" opacity={.6} radius={[3,3,0,0]} maxBarSize={22} />
           </BarChart>
         </ResponsiveContainer>
       </div>

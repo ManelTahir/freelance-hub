@@ -3,7 +3,7 @@ import { useStore } from '../store/useStore'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-const PIE_COLORS = ['#6366f1','#22c55e','#f59e0b','#60a5fa','#f87171','#a78bfa']
+const PIE_COLORS = ['#818cf8','#34d399','#fbbf24','#93c5fd','#fda4af','#c4b5fd']
 
 function fmt(n, cur = 'EUR') {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: cur, maximumFractionDigits: 0 }).format(n || 0)
@@ -94,7 +94,7 @@ export default function Dashboard() {
       <div style={{ background: 'var(--card2)', border: '1px solid var(--border)', borderRadius: 8, padding: '10px 14px', fontSize: 12 }}>
         <div style={{ color: 'var(--t2)', marginBottom: 4 }}>{label}</div>
         {payload.map(p => (
-          <div key={p.dataKey} style={{ color: p.dataKey === 'income' ? 'var(--green)' : 'var(--red)' }}>
+          <div key={p.dataKey} style={{ color: p.dataKey === 'income' ? 'var(--accent)' : 'var(--t2)' }}>
             {p.dataKey === 'income' ? 'Income' : 'Expenses'}: {fmt(p.value, currency)}
           </div>
         ))}
@@ -166,8 +166,8 @@ export default function Dashboard() {
               <XAxis dataKey="name" tick={{ fontSize: 11, fill: 'var(--t3)' }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fontSize: 10, fill: 'var(--t3)' }} axisLine={false} tickLine={false} tickFormatter={v => v >= 1000 ? `${(v/1000).toFixed(0)}k` : v} />
               <Tooltip content={<TT />} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
-              <Bar dataKey="income" fill="var(--green)" radius={[3,3,0,0]} maxBarSize={28} />
-              <Bar dataKey="expense" fill="var(--red)" opacity={.55} radius={[3,3,0,0]} maxBarSize={28} />
+              <Bar dataKey="income" fill="var(--accent)" radius={[3,3,0,0]} maxBarSize={28} />
+              <Bar dataKey="expense" fill="var(--t3)" opacity={.6} radius={[3,3,0,0]} maxBarSize={28} />
             </BarChart>
           </ResponsiveContainer>
         </div>
